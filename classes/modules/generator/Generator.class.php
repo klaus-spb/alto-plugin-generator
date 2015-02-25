@@ -2,6 +2,19 @@
 
 class PluginGenerator_ModuleGenerator extends ModuleORM {
 	
+	protected $oMapper;
+
+    public function Init() {
+        $this->oMapper = Engine::GetMapper(__CLASS__);
+    }
+	
+	public function ShowColumnsFromTable($sTableName) {
+		
+        $data = $this->oMapper->ShowColumnsFromTable($sTableName);
+
+        return $data;
+    }
+	
 	public function GenerateModule( $sTargetPath, $sPlugin, $sModule) {
 		$oViewer = E::ModuleViewer()->GetLocalViewer();
         $oViewer->Assign('sPlugin', $sPlugin);

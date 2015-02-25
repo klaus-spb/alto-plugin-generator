@@ -201,8 +201,13 @@ class PluginGenerator_ActionAdmin extends PluginGenerator_Inherits_ActionAdmin {
 		E::ModuleViewer()->AssignAjax('sTableName', $sTableName);
 		E::ModuleViewer()->AssignAjax('sTableExist', $this->Database_IsTableExists($sTableName));
 		
+		$aFields = array();
 		
+		if($sEntityLow && $sModuleLow){
+			$aFields = E::Module('PluginGenerator\Generator')->ShowColumnsFromTable($sTableName);
+		}
 		
+		E::ModuleViewer()->AssignAjax('aFields', $aFields);
 	}
 	
 	protected function EventGenerator() {
